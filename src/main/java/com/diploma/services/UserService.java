@@ -1,15 +1,11 @@
 package com.diploma.services;
 
-import com.diploma.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.diploma.models.User;
 
-@Service
-public class UserService {
-    @Autowired
-    UserRepository userRepository;
+import java.util.List;
 
-    public int registerNewUserServiceMethod(String fname, String lname, String email, String password){
-        return userRepository.registerNewUser(fname, lname,email, password);
-    }
+public interface UserService {
+    User saveUser (User user);
+    List<User> getAllUsers();
+
 }
