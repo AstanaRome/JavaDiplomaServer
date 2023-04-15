@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     private UserService userService;
     @Autowired
@@ -30,11 +30,16 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers(User user) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User test = userRepository.getUserByUsername(auth.getName());
-        System.out.println(test.getId());
+
         return userService.getAllUsers();
     }
+
+
+    @GetMapping("/{id}")
+    public User getById(@PathVariable int id) {
+        return userService.getById(id);
+    }
+
 
 
 }

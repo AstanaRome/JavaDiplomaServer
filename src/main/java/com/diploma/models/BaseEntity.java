@@ -1,7 +1,10 @@
 package com.diploma.models;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 
 @Data
@@ -10,5 +13,7 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    protected int id;
+    @Getter
+    @Setter
+    protected long id;
 }
