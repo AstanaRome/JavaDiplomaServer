@@ -3,6 +3,7 @@ package com.diploma.config;
 
 import com.diploma.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.*;
 import org.springframework.security.config.annotation.authentication.builders.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,10 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-                .antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-                .antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-                .antMatchers("/delete/**").hasAuthority("ADMIN")
+                .antMatchers("/").hasAnyAuthority("CLIENT", "DOCTOR", "ADMIN")
+                .antMatchers("/users").hasAnyAuthority("ADMIN")
+//                .antMatchers("/delete/**").hasAuthority("ADMIN")
 
                 //.antMatchers("/users/**").permitAll()
 

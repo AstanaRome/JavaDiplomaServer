@@ -30,9 +30,9 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers(User user) {
-
         return userService.getAllUsers();
     }
+
 
 
     @GetMapping("/{id}")
