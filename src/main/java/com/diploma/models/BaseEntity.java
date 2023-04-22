@@ -15,5 +15,5 @@ public abstract class BaseEntity {
     @Column(name = "id")
     @Getter
     @Setter
-    protected long id;
+    protected int id;
 }

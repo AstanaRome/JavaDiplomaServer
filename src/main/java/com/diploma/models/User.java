@@ -1,9 +1,11 @@
 package com.diploma.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +36,8 @@ public class User extends BaseEntity {
     @Column(name = "birthdate")
     @Getter
     @Setter
-    private String birthDate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate birthDate;
 
     @Column(name = "enabled")
     @Getter

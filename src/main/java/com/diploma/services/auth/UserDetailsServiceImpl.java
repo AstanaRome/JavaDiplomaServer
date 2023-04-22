@@ -1,4 +1,4 @@
-package com.diploma.services;
+package com.diploma.services.auth;
 
 
 import com.diploma.models.User;
