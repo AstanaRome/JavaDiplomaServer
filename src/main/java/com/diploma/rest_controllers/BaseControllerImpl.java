@@ -21,9 +21,8 @@ public abstract class BaseControllerImpl<T extends BaseEntity, S extends BaseSer
 
     @Override
     public List<T> getAll()
-
     {
-        System.out.println("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         return service.getAll();
     }
 
@@ -44,6 +43,8 @@ public abstract class BaseControllerImpl<T extends BaseEntity, S extends BaseSer
 
     @Override
     public void delete(@PathVariable int id) {
+
+        System.out.println("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         service.deleteById(id);
     }
 }

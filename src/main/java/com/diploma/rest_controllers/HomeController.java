@@ -29,13 +29,10 @@ public class HomeController {
     public String getHome() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User test = userRepository.getUserByUsername(auth.getName());
-        System.out.println(test.getRoles());
+        User user = userRepository.getUserByUsername(auth.getName());
+        System.out.println(user.getRole_id());
         String temp = "";
-        for (Role role : test.getRoles()) {
-            temp = role.getName();
-        }
-        return "succesfull" + temp;
+        return "succesfull" + user.getRole_id().getName();
     }
 
     @GetMapping("/info")

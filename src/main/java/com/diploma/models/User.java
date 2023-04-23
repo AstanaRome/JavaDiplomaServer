@@ -1,8 +1,7 @@
 package com.diploma.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Table(name = "users")
 public class User extends BaseEntity {
 
@@ -44,16 +46,20 @@ public class User extends BaseEntity {
     @Setter
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @Getter
+//    @Setter
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id")
+//    )
+//    private Set<Role> roles = new HashSet<>();
     @Getter
     @Setter
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
-
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinColumn(name = "role_id")
+    private Role role_id;
 
 
 

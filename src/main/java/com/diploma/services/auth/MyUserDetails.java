@@ -18,12 +18,11 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = user.getRoles();
+        Role roles = user.getRole_id();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        System.out.println(user.getRole_id().getName());
+            authorities.add(new SimpleGrantedAuthority(roles.getName()));
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
 
         return authorities;
     }
