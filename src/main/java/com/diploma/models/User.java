@@ -38,7 +38,7 @@ public class User extends BaseEntity {
     @Column(name = "birthdate")
     @Getter
     @Setter
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="CET")
     private LocalDate birthDate;
 
     @Column(name = "enabled")

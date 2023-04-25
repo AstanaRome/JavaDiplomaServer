@@ -43,8 +43,6 @@ public abstract class BaseControllerImpl<T extends BaseEntity, S extends BaseSer
 
     @Override
     public void delete(@PathVariable int id) {
-
-        System.out.println("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         service.deleteById(id);
     }
 }
