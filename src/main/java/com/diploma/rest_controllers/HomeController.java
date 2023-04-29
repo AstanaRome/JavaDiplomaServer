@@ -3,6 +3,7 @@ package com.diploma.rest_controllers;
 import com.diploma.models.Role;
 import com.diploma.models.User;
 import com.diploma.repository.UserRepository;
+import com.diploma.services.RecordService;
 import com.diploma.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,9 @@ public class HomeController {
     UserRepository userRepository;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RecordService recordService;
 
     public HomeController(UserService userService) {
         super();
