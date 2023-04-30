@@ -63,7 +63,6 @@ public class RecordService extends BaseServiceImpl<Record, RecordRepository> {
             }
 
         }
-        System.out.println(records2.size());
         return records2;
     }
 }

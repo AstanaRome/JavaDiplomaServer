@@ -1,6 +1,8 @@
 package com.diploma.rest_controllers;
 
+import com.diploma.models.Doctor;
 import com.diploma.models.Record;
+import com.diploma.models.Visit;
 import com.diploma.repository.UserRepository;
 import com.diploma.services.ClientService;
 import com.diploma.services.UserService;
@@ -34,6 +36,15 @@ public class ClientController {
         return clientService.myRecords();
     }
 
+    @GetMapping("/my_visits")
+    public List<Visit> myVisits() {
+        return clientService.myVisits();
+    }
+
+    @GetMapping("/doctors")
+    public List<Doctor> getAllDoctors() {
+        return clientService.getAllDoctors();
+    }
 
 
 }
