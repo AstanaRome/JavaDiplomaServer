@@ -2,8 +2,18 @@ package com.diploma.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+//import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import javax.validation.constraints.Pattern;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
@@ -24,6 +34,13 @@ public class User extends BaseEntity {
     @Getter
     @Setter
     private String password;
+
+    @Column(name = "email")
+    @Getter
+    @Setter
+    //@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
+    //@NotEmpty(message = "Email cannot be empty")
+    private String email;
 
     @Column(name = "first_name")
     @Getter

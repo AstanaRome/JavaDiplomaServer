@@ -30,39 +30,8 @@ public class RecordService extends BaseServiceImpl<Record, RecordRepository> {
         }
         return records;
     }
-    @Transactional
-    public Record setFreeRecord(Record record) {
-        Record temp = repository.findById(record.getId()).orElse(null);
-        if (temp != null && temp.getUser() == null){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            User user = userRepository.getUserByUsername(auth.getName());
-            temp.setUser(user);
-            System.out.println("ok");
-            System.out.println(temp);
-            return repository.save(temp);
-        }
-        System.out.println("fail");
-        return null;
-    }
 
 
-    @Transactional
-    public List <Record> myRecords() {
 
-        List <Record> records2 = new ArrayList<>();
-        List <Record> records = repository.findAll();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.getUserByUsername(auth.getName());
-        for (Record record: records) {
-            if (record.getUser()!= null){
-                if (user.getId() == record.getUser().getId()){
-                    Record record_temp = record;
-                    record_temp.getDoctor().getUser().setPassword("");
-                    records2.add(record_temp);
-                }
-            }
 
-        }
-        return records2;
-    }
 }

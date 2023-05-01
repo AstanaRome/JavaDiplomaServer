@@ -17,15 +17,11 @@ public class UserService extends BaseServiceImpl<User, UserRepository> {
 
     public UserService(UserRepository repository){super(repository);}
 
-    public User getMyInfo() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.getUserByUsername(auth.getName());
-        return userRepository.findById((int) user.getId()).orElse(null);
-    }
+
     @Override
     public User saveOrUpdate (User user){
         User userFromBd = userRepository.getUserByUsername(user.getUsername());
-        System.out.println(user.getPassword());
+
         if (userFromBd == null) {
             String password = user.getPassword();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

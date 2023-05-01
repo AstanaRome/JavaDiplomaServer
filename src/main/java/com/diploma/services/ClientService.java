@@ -33,11 +33,35 @@ public class ClientService {
 
 
     public Record setFreeRecord(Record record) {
-        return recordService.setFreeRecord(record);
-    }
+            Record temp = recordService.getById(record.getId());
+            if (temp != null && temp.getUser() == null){
+                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+                User user = userRepository.getUserByUsername(auth.getName());
+                temp.setUser(user);
+                return recordService.saveOrUpdate(temp);
+            }
+            System.out.println("fail");
+            return null;
+        }
+
 
     public List <Record> myRecords() {
-        return recordService.myRecords();
+            List <Record> records2 = new ArrayList<>();
+            List <Record> records = recordService.getAll();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.getUserByUsername(auth.getName());
+            for (Record record: records) {
+                if (record.getUser()!= null){
+                    if (user.getId() == record.getUser().getId()){
+                        System.out.println(record.getDoctor().getUser().getPassword());
+                        record.getDoctor().getUser().setPassword("");
+                        records2.add(record);
+                    }
+                }
+
+            }
+            return records2;
+
     }
 
     public List <Visit> myVisits() {
@@ -59,12 +83,12 @@ public class ClientService {
 
     public List <Doctor> getAllDoctors() {
         List<Doctor> doctors = doctorService.getAll();
-//        List<Doctor> doctors2 = new ArrayList<>();
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.getUserByUsername(auth.getName());
-//        for (Doctor doctor: doctors ) {
-//            doctor.getUser().setPassword("");
-//        }
+        List<Doctor> doctors2 = new ArrayList<>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.getUserByUsername(auth.getName());
+        for (Doctor doctor: doctors ) {
+            doctor.getUser().setPassword("");
+        }
         return doctors;
     }
 

@@ -1,8 +1,14 @@
 package com.diploma.rest_controllers;
 
 import com.diploma.models.User;
+import com.diploma.services.DoctorUserService;
 import com.diploma.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/users")
@@ -10,8 +16,15 @@ public class UserController extends  BaseControllerImpl<User, UserService>{
     protected UserController(UserService userService){
         super(userService);
     }
+    @Autowired
+    private UserService userService;
+    @PostMapping("/add")
+    ResponseEntity<String> addUser(@Valid @RequestBody  User user) {
 
-
+        userService.saveOrUpdate(user);
+        System.out.println("adduser");
+        return ResponseEntity.ok("User is valid");
+    }
 
 //    private UserService userService;
 //    @Autowired

@@ -35,12 +35,8 @@ public class HomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername(auth.getName());
         System.out.println(user.getRole_id());
-        String temp = "";
         return "succesfull" + user.getRole_id().getName();
     }
 
-    @GetMapping("/info")
-    public User getMyInfo() {
-        return userService.getMyInfo();
-    }
+
 }
