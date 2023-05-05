@@ -8,6 +8,7 @@ import com.diploma.services.DoctorUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,10 +27,11 @@ public class DoctorUserController {
     }
 
     @PostMapping("/free")
-    public Record addRecord(@RequestBody Record record) {
+    public Record addRecord(@RequestBody  Record record) {
         return doctorUserService.addRecord(record);
 
     }
+
 
     @GetMapping("/book")
     public List<Record> getAllBookRecords() {
@@ -40,6 +42,9 @@ public class DoctorUserController {
         return doctorUserService.getAllVisits();
     }
 
-
+    @PostMapping("/visit")
+    public Visit addVisit(@RequestBody Visit visit) {
+        return doctorUserService.addVisit(visit);
+    }
 
 }

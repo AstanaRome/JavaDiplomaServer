@@ -22,12 +22,12 @@ public class RecordService extends BaseServiceImpl<Record, RecordRepository> {
     }
     @Autowired
     UserRepository userRepository;
-    @Transactional
+
     public List<Record> getAllFree() {
         List<Record> records = repository.getAllFreeRecords();
-        for (Record record: records) {
-            record.getDoctor().getUser().setPassword("");
-        }
+//        for (Record record: records) {
+//            record.getDoctor().getUser().setPassword("");
+//        }
         return records;
     }
 

@@ -1,5 +1,6 @@
 package com.diploma.rest_controllers;
 
+import com.diploma.exception.ValidationException;
 import com.diploma.models.User;
 import com.diploma.services.DoctorUserService;
 import com.diploma.services.UserService;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 @RestController
@@ -19,8 +21,7 @@ public class UserController extends  BaseControllerImpl<User, UserService>{
     @Autowired
     private UserService userService;
     @PostMapping("/add")
-    ResponseEntity<String> addUser(@Valid @RequestBody  User user) {
-
+    ResponseEntity<?> addUser( @RequestBody  User user)  throws ValidationException {
         userService.saveOrUpdate(user);
         System.out.println("adduser");
         return ResponseEntity.ok("User is valid");

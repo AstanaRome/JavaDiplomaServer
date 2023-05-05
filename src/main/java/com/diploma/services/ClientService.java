@@ -28,7 +28,14 @@ public class ClientService {
     private DoctorService doctorService;
 
     public List<Record> getAllFreeRecords() {
-        return recordService.getAllFree();
+        List<Record> records = recordService.getAllFree();
+        List<Record> records2 = new ArrayList<> ();
+        for (Record record: records   ) {
+            if(record.isEnabled() == true){
+                records2.add(record);
+            }
+        }
+        return records2;
     }
 
 
@@ -51,13 +58,16 @@ public class ClientService {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User user = userRepository.getUserByUsername(auth.getName());
             for (Record record: records) {
-                if (record.getUser()!= null){
-                    if (user.getId() == record.getUser().getId()){
-                        System.out.println(record.getDoctor().getUser().getPassword());
-                        record.getDoctor().getUser().setPassword("");
-                        records2.add(record);
+                if (record.isEnabled() == true){
+                    if (record.getUser()!= null){
+                        if (user.getId() == record.getUser().getId()){
+                            System.out.println(record.getDoctor().getUser().getPassword());
+                         //   record.getDoctor().getUser().setPassword("");
+                            records2.add(record);
+                        }
                     }
                 }
+
 
             }
             return records2;

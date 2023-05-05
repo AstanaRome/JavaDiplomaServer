@@ -2,15 +2,13 @@ package com.diploma.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-//import org.hibernate.validator.constraints.Email;
+
 
 import javax.persistence.*;
 import javax.validation.Constraint;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -26,31 +24,46 @@ import java.util.Set;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column(name = "username")
+//    @NotNull
+//    @NotBlank
+//    @NotEmpty
+    @Column(name = "username", unique = true)
     @Getter
     @Setter
     private String username;
-    @Column(name = "password")
+
+//    @Size(min = 10, max = 200, message
+//            = "Password not lesser 6 symbols")
+//    @Column(name = "password")
     @Getter
     @Setter
     private String password;
 
-    @Column(name = "email")
+
+
+    @Column(name = "email", unique = true)
     @Getter
     @Setter
-    //@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
-    //@NotEmpty(message = "Email cannot be empty")
+  //  @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
+  //  @NotEmpty(message = "Email cannot be empty")
     private String email;
 
+//    @NotNull
+//    @NotBlank
+//    @NotEmpty
     @Column(name = "first_name")
     @Getter
     @Setter
     private String firstName;
 
+//    @NotNull
+//    @NotBlank
+//    @NotEmpty
     @Column(name = "last_name")
     @Getter
     @Setter
     private String lastName;
+
 
     @Column(name = "birthdate")
     @Getter
@@ -58,6 +71,7 @@ public class User extends BaseEntity {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="CET")
     private LocalDate birthDate;
 
+  //  @NotNull
     @Column(name = "enabled")
     @Getter
     @Setter

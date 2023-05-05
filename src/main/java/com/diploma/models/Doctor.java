@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 @Table(name = "doctors")
 public class Doctor extends BaseEntity {
 
+
     @Column(name = "qualification")
     @Getter
     @Setter
@@ -21,7 +24,7 @@ public class Doctor extends BaseEntity {
     @Getter
     @Setter
     private int experience;
-
+  //  @NotNull
     @Getter
     @Setter
     @OneToOne(cascade = { CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE})

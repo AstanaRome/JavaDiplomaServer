@@ -48,11 +48,14 @@ public class DoctorUserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername(auth.getName());
         for (Record record: records ) {
-            if(record.getDoctor().getUser().getId() == user.getId()){
-                if (record.getUser() == null){
-                    records2.add(record);
+            if(record.isEnabled() == true){
+                if(record.getDoctor().getUser().getId() == user.getId()){
+                    if (record.getUser() == null){
+                        records2.add(record);
+                    }
                 }
             }
+
         }
         return records2;
     }
@@ -64,13 +67,20 @@ public class DoctorUserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername(auth.getName());
         for (Record record: records ) {
-            if(record.getDoctor().getId() == user.getId()){
-                if (record.getUser() != null){
-                    record.getUser().setPassword("");
-                    records2.add(record);
+            if(record.isEnabled() == true){
+                if(record.getDoctor().getUser().getId() == user.getId()){
+
+                    if (record.getUser() != null){
+                      //  record.getUser().setPassword("");
+                        records2.add(record);
+                    }
                 }
             }
+
         }
+
+
+
         return records2;
     }
 
@@ -79,7 +89,15 @@ public class DoctorUserService {
         User user = userRepository.getUserByUsername(auth.getName());
         System.out.println(record.toString());
         record.setDoctor(doctorService.getByUserId(user.getId()));
+        record.setEnabled(true);
         return recordService.saveOrUpdate(record);
+    }
+    public Visit addVisit(Visit visit) {
+
+        Record record = visit.getRecord();
+        record.setEnabled(false);
+        recordService.saveOrUpdate(record);
+        return visitService.saveOrUpdate(visit);
     }
 
 
@@ -90,8 +108,8 @@ public class DoctorUserService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.getUserByUsername(auth.getName());
         for (Visit visit: visits ) {
-            if(visit.getDoctor().getId() == user.getId()){
-                    visit.getUser().setPassword("");
+            if(visit.getDoctor().getUser().getId() == user.getId()){
+                 //   visit.getUser().setPassword("");
                     visits2.add(visit);
 
             }
